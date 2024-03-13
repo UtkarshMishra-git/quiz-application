@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/answer_button.dart';
+import 'package:quiz_app/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -6,39 +8,34 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  var currentQuestion = questions[0];
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('The Question...'),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Answer 1'),
-            style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder()),
-          ),
-          ElevatedButton(
-              onPressed: () {},
-              child: Text('Answer 2'),
-              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder())),
-          ElevatedButton(
-              onPressed: () {},
-              child: Text('Answer 3'),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(),
-              )),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Answer 4'),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(),
+      child: Container(
+        margin: EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              currentQuestion.question,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 54, 102),
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+
+            //... help answers added as multiple individual values
+            ...currentQuestion.answers
+                .map((answer) => AnswerButton(ansText: answer, onClick: () {})),
+          ],
+        ),
       ),
     );
   }
