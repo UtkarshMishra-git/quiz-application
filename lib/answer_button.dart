@@ -9,6 +9,7 @@ class AnswerButton extends StatelessWidget {
       onPressed: onClick,
       child: Text(
         ansText,
+        textAlign: TextAlign.center,
       ),
       style: ElevatedButton.styleFrom(
           shape:
