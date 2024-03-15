@@ -6,7 +6,8 @@ class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key, required this.onSelectAnswer});
   final void Function(String answer) onSelectAnswer;
 
-  State<StatefulWidget> createState() => _QuestionsScreenState();
+  @override
+  State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
@@ -18,8 +19,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
-    var currentQuestion = questions[currentQuestionIndex];
+    final currentQuestion = questions[currentQuestionIndex];
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -29,7 +31,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              currentQuestion.question,
+              currentQuestion.text,
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -38,15 +40,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
 
             //... help answers added as multiple individual values
             ...currentQuestion
                 .getShuffledAnswers()
                 .map((answer) => AnswerButton(
-                    ansText: answer,
-                    onClick: () {
+                    answerText: answer,
+                    onTap: () {
                       answerQuestion(answer);
                     })),
           ],
